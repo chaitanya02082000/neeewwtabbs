@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Custom Startpage</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: Arial, sans-serif;
+            color: white;
+        }
+
+        .background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background: black;
+            background-size: cover;
+            background-position: center;
+        }
+
+        .container {
+            text-align: center;
+        }
+
+        .input-container {
+            margin: 20px 0;
+        }
+
+        .input-container input {
+            padding: 10px;
+            width: 300px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        .input-container button {
+            padding: 10px 20px;
+            border: none;
+            background-color: #007BFF;
+            color: white;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+        .input-container button:hover {
+            background-color: #0056b3;
+        }
+
+        h1 {
+            margin-bottom: 20px;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="background" id="background"></div>
+    <div class="container">
+        <h1>Welcome to Your Startpage</h1>
+        <div class="input-container">
+            <input type="text" id="gifUrl" placeholder="Enter GIF URL...">
+            <button onclick="setBackground()">Set Background</button>
+        </div>
+    </div>
+
+    <script>
+        function setBackground() {
+            const url = document.getElementById('gifUrl').value;
+            if (url) {
+                document.getElementById('background').style.backgroundImage = `url(${url})`;
+            } else {
+                alert('Please enter a valid GIF URL.');
+            }
+        }
+    </script>
+</body>
+</html>
