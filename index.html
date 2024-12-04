@@ -70,10 +70,38 @@
         <div class="input-container">
             <input type="text" id="gifUrl" placeholder="Enter GIF URL...">
             <button onclick="setBackground()">Set Background</button>
+            <button onclick="fetchGif()">Fetch Random GIF</button>
         </div>
     </div>
 
     <script>
+        async function fetchGif() {
+            const apiUrl = 'https://giphy.p.rapidapi.com/v1/gifs/search?q=funny%20cat';
+            const options = {
+                method: 'GET',
+                headers: {
+                    'x-rapidapi-host': 'giphy.p.rapidapi.com',
+                    'x-rapidapi-key': '92a23e52d3mshf3c3edfddcc813dp1db9afjsncb083abb0344'
+                }
+            };
+
+            try {
+                const response = await fetch(apiUrl, options);
+                const data = await response.json();
+                const gifs = data.data;
+
+                if (gifs && gifs.length > 0) {
+                    const randomGif = gifs[Math.floor(Math.random() * gifs.length)].images.original.url;
+                    document.getElementById('background').style.backgroundImage = `url(${randomGif})`;
+                } else {
+                    alert('No GIFs found.');
+                }
+            } catch (error) {
+                console.error('Error fetching GIF:', error);
+                alert('Failed to fetch GIF. Please try again later.');
+            }
+        }
+
         function setBackground() {
             const url = document.getElementById('gifUrl').value;
             if (url) {
